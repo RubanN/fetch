@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import url from '../apipage/url'
 
 export default class Post extends Component {
     constructor(props) {
@@ -7,42 +8,50 @@ export default class Post extends Component {
     
         this.state = {
              title:'',
-             body:''
+             body:'',
+             userId:''
         }
-        this.onClickFunc=this.onClickFunc.bind(this)
+    
     }
-    changeInput(e){
-        this.setState({
-            [e.target.name]: e.target.value
-        }, console.log(e.target.value))
+    changeInput=e=>{
+        this.setState({[e.target.name]: e.target.value})
     }
-    onClickFunc(e){
+    onClickFunc=e=>{
         e.preventDefault()
-        axios.post('http://jsonplaceholder.typicode.com/posts')
+        console.log(this.state);
+        axios.post(url,this.state)
         .then(res=>{
             console.log(res)
+        }).catch(err=>{
+            console.log(err);
         })
 
     }
     
     render() {
+        const {title, body} = this.state
+        console.log('render post--------->,');
         return (
             <div>
                 <form onSubmit={this.onClickFunc}>
-                    <input type="text"
+                    <div>
+                    <input 
+                    type="text"
                     name="title"
-                    value={this.state.title}
-                    placeholder="enter title"
-                    onChange={()=>this.changeInput()}
+                    value={title}
+                    onChange={this.changeInput}
                     />
+                    </div>
+                    <div>
                      <input type="text"
                      name="body"
-                    value={this.state.body}
-                    placeholder="enter body"
-                    onChange={()=>this.changeInput()}
+                    value={body}
+                    onChange={this.changeInput}
                     />
-                </form>
+                    </div>
                 <button type="submit">submit</button>
+                </form>
+               
             </div>
         )
     }

@@ -11,9 +11,9 @@ export default class RouteCom extends Component {
             <div>
                 <BrowserRouter>
                 <Switch>
-                    <Route path="/" component={Home}/>
-                    <Route path="/post" component={Post}/>
-                    <Route path="/list" component={List}/>
+                    <Route path="/" component={Home} exact/>
+                    <Route path="/post" component={Post} exact/>
+                    <Route path="/list" component={List} exact/>
                     <Route path="*" component={PageNotFound}/>
                 </Switch>
                 </BrowserRouter>
