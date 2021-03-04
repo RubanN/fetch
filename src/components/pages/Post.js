@@ -9,7 +9,7 @@ export default class Post extends Component {
         this.state = {
              title:'',
              body:'',
-             userId:''
+             userId:""
         }
     
     }
